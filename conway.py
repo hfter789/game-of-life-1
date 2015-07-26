@@ -20,9 +20,7 @@ def conway(state, k=None):
     c = np.zeros(b.shape)
 
     c[np.where((b == 2) & (state == 1))] = 1
-    c[np.where((b == 3) & (state == 1))] = 1
-
-    c[np.where((b == 3) & (state == 0))] = 1
+    c[np.where(b == 3)] = 1
 
     # return new state
     return c
