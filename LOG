@@ -1,0 +1,5 @@
+07/26/2015
+	conway.py : change the update routine from sleeping to an event handler
+				set the update interval as a variable instead of a magic number
+				trying to add click listener to the plot
+	
