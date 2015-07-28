@@ -3,14 +3,19 @@ import numpy as np
 import time
 from lib import fft_convolve2d
 import matplotlib.pyplot as plt
+import matplotlib as mpl
 
+mpl.rcParams['toolbar'] = 'None'
 # set up board
 plt.ion()
 m,n = 30,30
 UPDATE_INTERVAL = 0.01
 A = np.random.random(m*n).reshape((m, n)).round()
 fig = plt.figure()
+fig.canvas.set_window_title('Game of Life')
 img_plot = plt.imshow(A, interpolation="nearest", cmap = plt.cm.gray)
+plt.axis('off')
+plt.subplots_adjust(left=0, right=1, top=1, bottom=0)
 plt.show(block=False)
 global x
 global y
