@@ -3,9 +3,18 @@ import numpy as np
 import time
 from lib import fft_convolve2d
 import matplotlib.pyplot as plt
-plt.ion()
 
+# set up board
+plt.ion()
+m,n = 30,30
 UPDATE_INTERVAL = 0.01
+A = np.random.random(m*n).reshape((m, n)).round()
+fig = plt.figure()
+img_plot = plt.imshow(A, interpolation="nearest", cmap = plt.cm.gray)
+plt.show(block=False)
+global x
+global y
+x = y = -1
 
 def conway(state, k=None):
 	"""
@@ -24,27 +33,24 @@ def conway(state, k=None):
 
 	c[np.where((b == 2) & (state == 1))] = 1
 	c[np.where(b == 3)] = 1
-
 	# return new state
 	return c
 
 def onclick(event):
-	print 'button=%d, x=%d, y=%d, xdata=%f, ydata=%f'%(
-		event.button, event.x, event.y, event.xdata, event.ydata)
+	global x
+	global y
+	x = int(event.xdata)
+	y = int(event.ydata)
 
 if __name__ == "__main__":
-	# set up board
-	m,n = 100,100
-	A = np.random.random(m*n).reshape((m, n)).round()
-
 	# plot each frame
-	fig = plt.figure()
 	cid = fig.canvas.mpl_connect('button_press_event', onclick)
-	img_plot = plt.imshow(A, interpolation="nearest", cmap = plt.cm.gray)
-	plt.show(block=False)
 	while True:
 		A = conway(A)
+		if x != -1:
+			A[y][x] = 1
+			x = -1
+			y = -1
 		img_plot.set_data(A)
 		plt.draw()
 		plt.pause(UPDATE_INTERVAL)
-
