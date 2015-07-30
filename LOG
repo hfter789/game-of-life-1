@@ -6,3 +6,8 @@
 07/27/2015
 	conway.py : change event handler to use pause(). This would allow the click listener to 			raise an event
 	
+07/28/2015
+	conway.py : right click does not add an alive pixel when update mode is off.
+
+07/29/2015
+	conway.py : can add pixel only start with a random array and do a start-pause
