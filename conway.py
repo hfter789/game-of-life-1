@@ -15,8 +15,8 @@ UPDATE_INTERVAL = 0.01
 update = False
 
 plt.ion()
-# A = np.random.random(m*n).reshape((m, n)).round()
-A = np.zeros((m,n)).round()
+A = np.random.random(m*n).reshape((m, n)).round()
+# A = np.zeros((m,n)).round()
 fig = plt.figure()
 fig.canvas.set_window_title('Game of Life')
 img_plot = plt.imshow(A, interpolation="nearest", cmap = plt.cm.gray)
@@ -33,7 +33,6 @@ x = y = -1
 def startUpdate(event):
 	global update
 	update = True
-	print 'start'
 
 def pauseUpdate(event):
 	global update
@@ -47,7 +46,6 @@ def stopUpdate(event):
 	A = np.zeros((m,n)).round()
 	img_plot.set_data(A)
 	plt.draw()
-	print 'stop'
 
 def mouseclick(event):
 	global x
@@ -59,7 +57,6 @@ def mouseclick(event):
 		return
 	x = int(event.xdata)
 	y = int(event.ydata)
-	print y,x
 
 if __name__ == "__main__":
 	cid = fig.canvas.mpl_connect('button_press_event', mouseclick)
@@ -82,14 +79,12 @@ if __name__ == "__main__":
 
 	while True:
 		if x != -1:
-			print 'in1',A[y][x]
 			A[y][x] = 1
 			x = -1
 			y = -1
 			img_plot.set_data(A)
 			plt.draw()
 		if update:
-			print 'in2'
 			A = automatas.conway(A)
 			img_plot.set_data(A)
 			plt.draw()
