@@ -1,10 +1,10 @@
 import sched, time
 import numpy as np
-import time
 from lib import fft_convolve2d
 import matplotlib.pyplot as plt
 import matplotlib as mpl
 from matplotlib.widgets import Button
+import automatas
 
 #remove the default toolbar from figure
 # mpl.rcParams['toolbar'] = 'None'
@@ -15,8 +15,8 @@ UPDATE_INTERVAL = 0.01
 update = False
 
 plt.ion()
-A = np.random.random(m*n).reshape((m, n)).round()
-# A = np.zeros((m,n)).round()
+# A = np.random.random(m*n).reshape((m, n)).round()
+A = np.zeros((m,n)).round()
 fig = plt.figure()
 fig.canvas.set_window_title('Game of Life')
 img_plot = plt.imshow(A, interpolation="nearest", cmap = plt.cm.gray)
@@ -28,26 +28,6 @@ plt.show(block=False)
 global x
 global y
 x = y = -1
-
-def conway(state, k=None):
-	"""
-	Conway's game of life state transition
-	"""
-
-	# set up kernel if not given
-	if k == None:
-		m, n = state.shape
-		k = np.zeros((m, n))
-		k[m/2-1 : m/2+2, n/2-1 : n/2+2] = np.array([[1,1,1],[1,0,1],[1,1,1]])
-
-	# computes sums around each pixel
-	b = fft_convolve2d(state,k).round()
-	c = np.zeros(b.shape)
-
-	c[np.where((b == 2) & (state == 1))] = 1
-	c[np.where(b == 3)] = 1
-	# return new state
-	return c
 
 
 def startUpdate(event):
@@ -110,7 +90,7 @@ if __name__ == "__main__":
 			plt.draw()
 		if update:
 			print 'in2'
-			A = conway(A)
+			A = automatas.conway(A)
 			img_plot.set_data(A)
 			plt.draw()
 		plt.pause(UPDATE_INTERVAL)

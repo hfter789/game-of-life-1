@@ -11,3 +11,7 @@
 
 07/29/2015
 	conway.py : can add pixel only start with a random array and do a start-pause
+				but adding doesn't work if matrix A begins with all zeros
+
+07/30/2015
+	conway.py : factor out conway function to a new python file automatas.py

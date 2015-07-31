@@ -1,0 +1,4 @@
+New Design of conway Game of Life.
+	The new design would keep the calculation function fft2, but there will be three parts of the program: viewer, data, and controller. Viewer gives what the users see, data has the matrix and does data calculation, and lastly, controller handles button clicks.
+
+	I might switch platform to Django.??
